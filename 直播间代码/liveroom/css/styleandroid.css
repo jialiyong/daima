@@ -1,0 +1,412 @@
+ul,li{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+.left{
+    float:left;
+}
+.divblock{
+    width: 100%;
+    height: 31.5%;
+    display: block;
+    background-color: black;
+}
+.bottle{
+    position: absolute;
+    height: 68.5%;
+    width: 100%;
+    overflow: hidden;
+    font-family: "微软雅黑";
+    background-color: #333335;
+    position: relative;
+}
+.modeldisplay{
+    position: relative;
+    width: 100%;
+    display:none;
+    color: #D6D6D8;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+}
+.longli{
+    width: 100%;
+    height:40px;
+    color:#A6A6A8;
+    line-height:40px;
+    text-align: center;
+    background-color: #232325;
+}
+
+.sortli{
+    width:50%;
+}
+
+.threeli{
+    width:33.3%;
+}
+
+.leftline{
+    width:1px;
+    float:left;
+    height:14px;
+    margin:13px 0;
+    display:block;
+    background-color: #A6A6A8;
+}
+
+.active{
+    color:#EEEEEF;
+    text-decoration:underline;
+}
+.focus{
+    display:block;
+}
+
+/*奥点云DMS样式*/
+#chat_show{
+    margin: 0;
+    width: 100%;
+    height: 90%;
+    border: none;
+    resize: none;
+    overflow: scroll;
+    background-color: #333335;
+}
+
+.foot{
+    position: absolute;
+    bottom: 0px;
+    height: 10%;
+    width:100%;
+    background-color: #232325;
+}
+
+#idtext{
+    width: 80%;
+    height:93%;
+    float: left;
+    margin: 2px;
+    resize: none;
+    display: inline;
+    border-radius: 4px;
+    border:1px solid #88888A;
+    background-color: #232325;
+}
+
+#chatbox button{
+    width: 18.5%;
+    height: 90%;
+    float: right;
+    border:0 none;
+    color: #8B8B8D;
+    margin-top: 3px;
+    display: inline;
+    font-size: 14px;
+    background-color: #232325;
+}
+
+
+/*课程详情模块样式*/
+#info div{
+    margin: 16px 0;
+    overflow:hidden;
+    position:relative;
+}
+
+
+#info .info-title{
+    width:26%;
+    text-align: right;
+    display:inline-block;
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+#info .info-des{
+    width:68%;
+    text-align:left;
+    display:inline-block;
+    margin-left:28%;
+}
+
+/*支持模块样式*/
+.support{
+    -width: 100%;
+    -height: 100%;
+}
+
+/*音视频切换按钮*/
+.VideoOrAudio{
+    top: 0px;
+    right: 0px;
+    color: #1f3771;
+    width: 80px;
+    height: 25px;
+    font-size: 14px;
+    position: fixed;
+    text-align: center;
+    background: #3a87ca;
+    border: 1px solid #b3d5ff;
+}
+/*logo*/
+.tcplayerbox{
+    position: relative;
+}
+.logobox{
+    z-index:999;
+    width: 80px;
+    height: 40px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.logobox image{
+    width: 80px;
+    height: 40px;
+    display: block;
+
+}
+/*红包*/
+.bottle .redpay{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+.bottle .redpay img{
+    width: 30px;
+    height: 30px;
+}
+/*金额弹出框*/
+.aside {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+.aside {
+    -webkit-transition: visibility .25s;
+    transition: visibility .25s;
+    z-index: 3;
+    visibility: hidden;
+    overflow: hidden;
+}
+.aside > div { text-align: center; }
+.aside.active {
+    -webkit-transition: none;
+    transition: none;
+    visibility: visible;
+}
+ /*.leftContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height:30px;
+    background:#fff;
+    -webkit-transition: transform .25s;
+    transition: transform .25s;
+    -webkit-transform:translateX(-100%);
+    transform:translateX(-100%);
+}
+.activeleft > .leftContent {
+    -webkit-transform:translateX(0%);
+    transform:translateX(0%);
+}*/
+
+.botContent {
+    position: absolute;
+    bottom: 0;
+    right: 40px;
+    top: 40px;
+    left: 40px;
+    background:#ffffff;
+    -webkit-transition: transform .15s,bottom .15s;
+    transition: transform .15s;
+    -webkit-transform:translateY(100%);
+    transform:translateY(100%);
+    }
+.active > .botContent {
+    bottom: 40px;
+    -webkit-transform:translateY(0%);
+    transform:translateY(0%);
+}
+.close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.botContent .close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .3;
+}
+.botContent p {
+    float: left;
+    margin: 7px 15px;
+    font-size: 16px;
+    color: #3399ff;
+
+}
+.botContent .line {
+    position: absolute;
+    top: 35px;
+    width: 100%;
+    height: 1px;
+    background: #eeeeee;
+}
+.botContent .price{
+    margin-top: 55px;
+    margin-left: 10%;
+    width: 80%;
+    height: 40%;
+}
+.botContent .price div{
+   float: left;
+   width: 30%;
+   height: 40%;
+   font-size: 12px;
+   border: 1px solid #eee;
+   border-radius: 5px;
+   margin-bottom: 6px;
+   color: #ff6666;
+   display:table;
+}
+.botContent .price div span {
+      display:table-cell;
+   vertical-align:middle;
+}
+.botContent .price div:nth-child(2){
+    margin: 0 5%;
+}
+.botContent .price div:nth-child(5){
+    margin: 0 5%;
+}
+.botContent .price .redbgc{
+    color: #fff;
+    background-color: #ff6666;
+}
+.botContent #paybtn{
+    border-style: none;
+    width: 40%;
+    height: 30px;
+    background-color: #ff6666;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #fff;
+    box-shadow:0px 2px 5px #888888;
+}
+/*左边打赏*/
+.leftContent {
+    position: absolute;
+    display: none;
+    top: 75px;
+    left: 0;
+    width: 200px;
+    padding-top: 8px;
+    padding-left: 15px;
+    background-color: #dea03f;
+    border-radius: 0 5px 5px 0;
+    z-index: 33;
+    height:70px;
+}
+.leftContent p{
+    font-size: 16px;
+    color:#8d0c0c;
+}
+.leftContent img{
+    -webkit-transform:rotate(30deg);
+    transform:rotate(30deg);
+   width: 50px;
+   height: 50px;
+   position: absolute;
+   top: -20px;
+   right: 10px;
+}
+
+
+/*播放器样式*/
+#playerbutton{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -20px;
+    margin-top: -20px;
+    z-index: 999;
+}
+#playerbutton img{
+    width: 40px;
+    height: 40px;
+}
+/*自定义控制条*/
+.controls {
+    width: 95%;
+    height: 30px;
+    background-color: rgb(16, 16, 16);
+    border-radius: 4px;
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 5px;
+    z-index: 99;
+    opacity: 1;
+}
+
+.player:hover .controls {
+    opacity: 1;
+}
+
+/*播放/暂停*/
+.controls .switch {
+    display: block;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    color: #FFF;
+    position: absolute;
+    top: 5px;
+    left: 11px;
+}
+.controls .livebroadcast{
+    position: absolute;
+    top: 5px;
+    left: 40px;
+    color: #fff;
+}
+/*全屏按钮*/
+.controls .expand {
+    display: block;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    color: #FFF;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+}
+.controls a:focus, .controls a:hover {
+    text-decoration: none;
+}

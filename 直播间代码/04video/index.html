@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>视频播放</title>
+    <link rel="stylesheet" href="css/font-awesome.css"/>
+    <link rel="stylesheet" href="css/player.css"/>
+</head>
+<body>
+<figure>
+    <figcaption>视频播放器</figcaption>
+    <div class="player">
+        <video src="./video/fun.mp4"></video>
+        <div class="controls">
+            <!-- 播放/暂停 -->
+            <a href="javascript:;" class="switch fa fa-play"></a>
+            <!-- 全屏 -->
+            <a href="javascript:;" class="expand fa fa-expand"></a>
+            <!-- 进度条 -->
+            <!--<div class="progress">-->
+                <!--<div class="loaded"></div>-->
+                <!--<div class="line"></div>-->
+                <!--<div class="bar"></div>-->
+            <!--</div>-->
+            <!-- 时间 -->
+            <!--<div class="timer">-->
+                <!--<span class="current">00:00:00</span> /-->
+                <!--<span class="total">00:00:00</span>-->
+            <!--</div>-->
+            <!-- 声音 -->
+        </div>
+    </div>
+</figure>
+<script src="./js/jquery.min.js"></script>
+<script>
+    /*我们需要完成的功能*/
+    $(function(){
+        var w = window.screen.width;
+        /*获取到视频对象*/
+        var video = document.querySelector('video');
+        /*获取到一系列操作dom*/
+        var $btn = $('.switch');
+
+        var $full = $('.expand');
+
+        var $bar = $('.bar');
+
+        var $line = $('.line');
+
+        var $currTime = $('.current');
+
+        var $countTime = $('.total');
+
+        /*格式化时间*/
+        var getFormatTime = function(time){
+            var time = time || 0;/*00:00:00*/
+
+            var h = Math.floor(time/3600);
+            var m = Math.floor(time%3600/60);
+            var s = Math.floor(time%60);
+
+            return (h<10?'0'+h:h)+':'+(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);
+        };
+
+        /*1.当能播放的时候  显示播放器，知道视频的总时长，设置播放总时长*/
+        video.oncanplay = function(){
+            /*显示播放器*/
+            video.style.display = "block";
+            /*总时长*/
+            console.log(video.duration);
+            /*设置播放总时长*/
+            $countTime.html(getFormatTime(video.duration));
+        }
+
+        /*2.播放*//*3.暂停*/
+        $btn.on('click',function(){
+            /*判断视频的播放状态*/
+            if(video.paused){
+                video.play();
+            }else{
+                video.pause();
+            }
+            /*把按钮变成暂停*/
+            $btn.toggleClass('fa-pause');
+        });
+
+        /*4.显示播放进度*/
+        video.ontimeupdate = function(){
+            /*当前播放的时间*/
+            console.log(video.currentTime);
+            /*当前时间除以总时长 百分比的格式*/
+            var pre = video.currentTime/video.duration * 100 +'%';
+            /*设置进度条的宽度*/
+            $line.css('width',pre);
+            /*显示当前播放的时间*/
+            $currTime.html(getFormatTime(video.currentTime));
+        }
+
+        /*5.全屏*/
+        $full.on('click',function(){
+            /*使元素全屏的api*/
+            video.width = w;
+            video.style.zIndex= 111;
+
+        });
+
+        /*6.跃进播放*/
+        $bar.on('click',function(e) {
+            /*比例*/
+            var scale = e.offsetX / $bar.width();
+            /*需要去的时间*/
+            var currTime = scale * video.duration;
+            /*设置*/
+            video.currentTime = currTime;
+        });
+
+        /*7.播放结束重置视频*/
+        video.onended = function(){
+            /*重置按钮*/
+            $btn.removeClass('fa-pause');
+            /*进度条*/
+            $line.css('width','0px');
+            /*当前时间*/
+            $currTime.html(getFormatTime());/*00:00:00*/
+            /*回到起始的画面*/
+            video.currentTime = 0;
+        }
+    });
+</script>
+</body>
+</html>

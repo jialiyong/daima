@@ -1,0 +1,295 @@
+<?php
+    date_default_timezone_set('PRC'); 
+	error_reporting(E_ERROR);
+    require_once "../lib/Yikoo.config.php";
+    //如果当前时间已经大于开始时间则直接跳转至中转站  省去渲染html和执行js的时间
+    $time = time();
+    $deadline = $_GET['deadline'];
+    $deadline -= 300;
+    if($time > intval($deadline)){
+        $url = YikooConfig::url."/example/orderUser.php?deadline_judge=right";
+        header("location:$url");
+    }
+    session_start();
+	require_once "../lib/WxPay.Config.php";
+	//分享功能
+	require_once "jssdk.php";
+    $appid = WxPayConfig::APPID;
+    $jssdk = new JSSDK();
+	$signPackage = $jssdk->GetSignPackage();
+    $courseData = $_SESSION['courseData'];
+    $courseid = $_SESSION['courseid'];
+    $pic = empty( $_SESSION['courseData']['small_picture'] )?$_SESSION['small_picture']:$_SESSION['courseData']['small_picture'];
+    $titles = empty( $_SESSION['courseData']['title'])?$_SESSION['title']:$_SESSION['courseData']['title'];
+    $desc = empty( $_SESSION['courseData']['about'] )?$_SESSION['about']:$_SESSION['courseData']['about'];
+    $inviteid = $_SESSION['inviteid'];
+    $UserVguanID = $_SESSION['openid'];
+    if($deadline > 1900000000){
+        //直播已经结束了
+        $timezone = "after";
+        //课程已经结束
+        $ad_config = json_decode(file_get_contents("../ad_config/$courseid.json"));
+        $font_config=json_decode(file_get_contents("../ad_config/font$courseid.json"));
+        if(empty($ad_config -> end_ad_id)){
+            //无配置结束图片 使用默认项
+            $ad_id = YikooConfig::end_ad_url;
+            //无配置标题文字 使用默认项
+            if(empty($font_config->font_name)){
+                $title="微观直播";
+            }else{
+                $title=$font_config->font_name;
+            }
+            //无配置图片链接地址 使用默认项
+            if(empty($ad_config->url)){
+                $img_url="http://ehall.vguan.cn/";
+            }else{
+                $img_url=$ad_config->url;
+            }
+        }else{
+
+            //有配置结束图片 使用配置项
+            $ad_id = $ad_config -> end_ad_id;
+            //无配置标题文字 使用默认项
+            if(empty($font_config->font_name)){
+                $title="微观直播";
+            }else{
+                $title=$font_config->font_name;
+            }
+            //无配置图片链接地址 使用默认项
+            if(empty($ad_config->url)){
+                $img_url="http://ehall.vguan.cn/";
+            }else{
+                $img_url=$ad_config->url;
+            }
+        }
+        //echo "1".$top_ad_id.$bottom_ad_id;
+    }else{
+        //课程还未开始
+        $timezone = "before";
+        $content = file_get_contents("../ad_config/$courseid.json");
+        $font_config=json_decode(file_get_contents("../ad_config/font$courseid.json"));
+        if($content == null){
+            //无配置标题文字 使用默认项
+            if($font_config==null){
+                $title="微观直播";
+            }else{
+                $title=$font_config->font_name;
+            }
+            //无开始的图片 使用默认项
+            $ad_id = YikooConfig::start_ad_url;
+            //无图片的链接地址 使用默认项
+            $url="http://ehall.vguan.cn/";
+        }else{
+            //有配置开始图片 用配置项
+            $data = json_decode($content);
+            $ad_id = $data -> start_ad_id;
+            //有配置标题文字 用配置项
+            if($font_config==null){
+                $title="微观直播";
+            }else{
+                $title=$font_config->font_name;
+            }
+            //有图片的链接地址 用配置项
+            if(empty($data->url)){
+                $img_url="http://ehall.vguan.cn/";
+            }else{
+                $img_url=$data->url;
+            }
+        }
+        //echo "2".$top_ad_id.$bottom_ad_id;
+    }
+    $ad_id = YikooConfig::pic_dir . $ad_id;
+    $font_config=json_decode(file_get_contents("../ad_config/font$courseid.json"));
+    //有配置标题文字 用配置项
+    if(empty($font_config->font_name)){
+        $title="微观直播";
+    }else{
+        $title=$font_config->font_name;
+    }
+    //echo $deadline;
+?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" value="notranslate" >
+    <title><?=$title?></title>
+    <link rel="stylesheet" href="./stylesheet.css">
+    <style>
+        .debuger{
+            font-family: "unidreamledregular";
+
+            /*border: solid 1px yellow;*/
+        }
+    </style>
+</head>
+
+<body>
+<?php
+
+if($timezone == "before") {
+    echo <<<EOF
+
+<div id="debuger" class="debuger" style=";color:white;z-index: 1;font-size: 20px;text-align: center;position:absolute;top: 50%;width: 99%;">000</div>
+
+EOF;
+
+}
+?>
+<input type="text" value="<?=$desc?>" id="describe"  style="display:none">
+<input type="hidden" value="<?= $img_url?>" id="img">
+<a onclick="statistic('click')"><img src="<?=$ad_id?>" style="position: absolute;width: 100%;height: 100%;top: 0;left: 0"></a>
+</body>
+
+</html>
+<script>
+     //alert("<?='跳转时间：'.date("Y-m-d H:i:s",$deadline)?>");
+     var now = <?=$time?>;
+     var deadline = <?=$deadline?>;
+     var debuger = document.getElementById("debuger");
+    function timepicker(){
+        now  = now +1;
+        var time = new Date();
+        var time = time.getTime();
+        time = parseInt(time/1000);
+        if(now >= deadline || time > deadline){
+            //alert("直播即将开始");
+            window.location.href = "<?=YikooConfig::url?>" + "/example/orderUser.php?course=" + "<?="0".$courseid?>&deadline_judge=right";
+            return false;
+        }
+        debuger.innerHTML = "距直播开始：" +  stampTodate(deadline - now + 300);
+        //debuger.innerHTML = deadline - now + '+' + time + '>?' + deadline;
+        setTimeout("timepicker()",1000);
+    }
+    timepicker();
+    function stampTodate(timestamp){
+        var content = "无";
+        var t_days = parseInt(timestamp / 86400);
+        var t_hours = parseInt((timestamp % 86400) / 3600);
+        var t_minutes = parseInt((timestamp % 3600) / 60);
+        var t_seconds = parseInt(timestamp % 60);
+
+        return checkLength(t_days) + "日" + checkLength(t_hours) + "时" + checkLength(t_minutes) + "分" + checkLength(t_seconds) + "秒";
+//        if(t_days == 0){
+//            //没有日
+//            if(t_hours == 0){
+//                //没有时
+//                if(t_minutes == 0){
+//                    //没有分
+//                    content = timestamp + "秒";
+//                }else {
+//                    //有分
+//                    content = t_minutes + "分" + (timestamp - t_minutes * 60) + "秒";
+//                }
+//            }else {
+//                //有时
+//                content = t_hours + "时" + (t_minutes - t_hours * 60) + "分" + (timestamp - t_minutes * 60) + "秒";
+//            }
+//        }else {
+//            content = t_days + "日" + (t_hours - t_days * 24) + "时" + (t_minutes - t_hours * 60) + "分" + (timestamp - t_minutes * 60) + "秒";
+//        }
+//        return content;
+    }
+    function checkLength(stamp){
+        if(stamp < 10){
+            return "0" + String(stamp);
+        }else {
+            return stamp;
+        }
+    }
+</script>
+
+<script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    if(typeof jQuery == 'undefined'){
+        document.write("<script src='../js/jquery-1.8.3.js'><\/script>");
+        //alert("jquery 加载失败");
+    }else {
+        //alert("jquery 加载成功");
+    }
+    var theData = new Object();
+    //展现量
+    function statistic(type){
+        theData.courseid = "<?=$courseid?>";
+        theData.timezone = "<?=$timezone?>";
+        theData.type = type;
+        transData = JSON.stringify(theData);
+        $.ajax({
+            type:"GET",
+            timeout:1000,
+            url:'<?=YikooConfig::adStatisticAPI?>',
+            async:true,
+            contentType:"text/json",
+            dataType:"jsonp",
+            data:{
+                theData : transData
+            },
+
+            success:function(data){
+                console.log(data);
+                if(type == "click"){
+                    window.location.href ="<?=$img_url?>";
+                }
+            },
+            error:function(data){
+                //alert("fail");
+                console.log(data);
+            }
+        });
+
+    }
+    statistic("display");
+</script>
+<!-- 调用JS接口的页面必须引入如下JS文件 -->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    var describe = document.getElementById('describe').value;
+    //分享功能
+    wx.config({
+        debug: false,
+        appId: '<?= $signPackage["appId"];?>',
+        timestamp: <?= $signPackage["timestamp"];?>,
+        nonceStr: '<?= $signPackage["nonceStr"];?>',
+        signature: '<?= $signPackage["signature"];?>',
+        jsApiList: [
+            // 所有要调用的 API 都要加到这个列表中
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'openLocation',
+            'getLocation',
+            'scanQRCode'
+        ]
+    });
+
+
+    wx.ready(function () {
+
+        // 在这里调用 API
+        var shareData = {
+            title: "<?= $title.'：'.$titles;?>" ,
+            desc: describe,
+            link: "<?=YikooConfig::url?>/example/Buypage.php?courseid=<?=$courseid."&inviteid=".$inviteid."&spread=".$UserVguanID?>",
+            imgUrl: "<?=$pic?>"
+        };
+        wx.onMenuShareAppMessage(shareData);
+        wx.onMenuShareTimeline(shareData);
+        wx.onMenuShareQQ(shareData);
+        wx.onMenuShareWeibo(shareData);
+
+        //通过checkJsApi判断当前客户端版本是否支持指定获取地理位置
+        wx.checkJsApi({
+            jsApiList: [
+                'getLocation'
+            ],
+            success: function (res) {
+                if (res.checkResult.getLocation == false) {
+                    alert('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+                    return;
+                }
+            }
+        });
+    });
+
+</script>

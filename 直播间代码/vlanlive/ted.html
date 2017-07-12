@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport"  content="width=device-width,user-scalable=no">
+    <title>直播大厅</title>
+</head>
+<script src="TouchSlide.1.1.js"></script>
+<script src="jquery-1.11.2.min.js"></script>
+<link rel="stylesheet" href="style.css">
+<body>
+<!-- 头部 -->
+<!--   <header>
+    <div>微观直播</div>
+</header> -->
+
+<div id="content">
+    <!-- 本例主要代码 Start ================================ -->
+    <div id="focus" class="focus">
+        <div class="hd">
+            <ul></ul>
+        </div>
+        <div class="bd">
+            <ul>
+                <volist name='rows' id='val'>
+                    <li>
+                        <a href="{$val['focus_url']?$val['focus_url']:'#'}"  />
+                        <img src="./images/banner.jpg" />
+                        </a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+    <div class="tab">
+        <ul>
+            <li><a href="./index.html"><img src="./images/liverd.png" alt=""><p>直播推荐</p></a></li>
+            <li><a href="./past.html"><img src="./images/past.png" alt=""><p>过往直播</p></a></li>
+            <li  class="on"><a href="./ted.html"><img src="./images/ted.png" alt=""><p>海油TED</p></a></li>
+        </ul>
+    </div>
+    <div class="layout"><!-- 高度自适应需添加外层 -->
+        <ul>
+            <li class="today">暂无过往直播</li>
+            <li class="today">过往直播</li>
+            <li class="list">
+                <a href="{$val.zhibo_url}">
+                    <div class="pic"><img src="{$val.large_picture}" /></div>
+                    <div class="con">
+                        <div class="tit">{$val.title}</div>
+                        <p>{$val.start_time|date='Y-m-d H:i',###}-{$val.end_time|date='H:i',###}</p>
+                        <p class="rig">直播回放</p>
+                    </div>
+                    <div class="borderbtm"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<!--banner制作的js-->
+<script type="text/javascript">
+    TouchSlide({
+        slideCell:"#focus",
+        titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+        mainCell:".bd ul",
+        effect:"left",
+        autoPlay:true,//自动播放
+        autoPage:true, //自动分页
+        switchLoad:"_src", //切换加载，真实图片路径为"_src"
+        /*delayTime:"5000"*/
+        interTime:"5000"
+    });
+</script>

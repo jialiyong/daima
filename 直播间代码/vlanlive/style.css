@@ -1,0 +1,126 @@
+ /* css 重置 */
+    body, p, input, h1, h2, h3, h4, h5, h6, ul, li, dl, dt, dd, form { margin: 0; padding: 0; list-style: none; vertical-align: middle; font-weight:normal; }
+    img { border:0; margin: 0; padding: 0;   }
+    body { color: #000; -webkit-user-select: none; -webkit-text-size-adjust: none; font:normal 15px/200% "微软雅黑", helvetica, arial; text-align:left;   }
+    header, section, footer { display: block; margin: 0; padding: 0 }
+    a{text-decoration:none;color:#0072cf;}
+    
+    body{ background:#fff; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+    /* 头部 */
+    header{  background:#ff5a00;text-align: center; color: #fff; }
+    header .logo{ padding:10px 0 5px 10px;  color:#fff;  font-style:italic; font-weight:bold; text-shadow:1px 1px 1px #965e18; font-size:12px; }
+    header .logo a{ font-size:30px; line-height:30px; color:#fff;  }
+
+    /* 尾部 */
+    footer{ text-align:center; padding:10px 0; line-height:18px; font-size:14px; }
+
+    /* 内容 */
+    #content{ background:#fff;  }
+    .path{ padding:0 0 5px 5px;   }
+
+    /* 效果导航 */
+    .effectNav{ margin-top:10px;  border-top:1px solid #666; background:#999; padding-bottom:10px;  }
+    .effectNav h3{ padding:0 10px; background:#ddd; background:#333; color:#fff;  }
+    .effectNav ul{ font-size:0;  }
+    .effectNav li{ display:inline-block; font-size:12px; padding:0 10px; margin:10px 0 0 10px;  background:#cdcdcd;  }
+    .effectNav li.new{ background:#fce8cd;  }
+
+
+
+
+    .tab{  font-size:1.5em; background:#fff; /* border-top:2px solid #CECECE; */  }
+    .tab ul{ overflow:hidden; box-shadow: 0px 2px 2px  #eee;box-sizing:border-box; }
+    .tab ul li{ float:left; width:33.3%;border-right: 1px solid #ccc;color:#515151; text-align: center;box-sizing: border-box; }
+    .tab ul li p{
+         font-size: 0.6em;
+         line-height: 1px;
+            margin-bottom: 0.9em;
+        margin-top: 0.4em;
+    }
+     .tab ul li img{width: 2em; padding-top:0.3em; text-align: center;}
+     .tab ul li:nth-child(4){border-right: 0;}
+     .tab ul .on{ border-bottom:2px solid #0072cf; color:#0072cf; border-right: 1px solid #ccc; }
+     .tab ul .on a{ display:block; color:#0072cf;/* 修复Android 4.0.x 默认浏览器当前样色无效果bug */  }
+       /* .tabBox .hd ul .on p{
+            font-size: 0.8em;
+        }*/
+     .tab ul .on a span{padding-top: 0em;}
+     .tab ul .on a:hover{ }
+
+
+ .layout ul{ /* padding:10px 0 10px 10px;  */ margin-top:.5em;  overflow:hidden;}
+ .layout li{padding-left: 1em; height:24px; line-height:14px;  padding-top: .4em; }
+ .layout li:first-child{
+     border-bottom: 1px solid #ccc;
+ }
+ .layout li:nth-child(1){padding-top: 0em; padding-left: 1em;}
+ .layout ul li a img{width: 6.8em; height: 4.3em;}
+ .layout a{ -webkit-tap-highlight-color:rgba(0,0,0,0); }  /* 去掉链接触摸高亮 */
+ .layout li a{ color:#555;  }
+ .layout .list{ height:70px; overflow:hidden; position:relative;}
+ .layout .list .pic{  float:left;    }
+ .layout .list .con{ margin-left:120px; line-height:20px;  font-size: .8em; padding-right: 10px;}
+ .layout .list .con p{ font-size:.8em; color:#999; padding-right: 1em; position: absolute; bottom: 1em;}
+ .layout .list .con p span{float: right; right: 1em; }
+ .layout .list .con .rig{right: .5em; color: #ff5a00;}
+ .layout .list .con .rig1{right: .5em; color: #ccc;}
+ .layout .today{/*  background: #eee; */ }
+ .picen{ text-align: center;}
+ .picen img{width: 10em; margin-top:6em; text-align: center;}
+ .borderbtm{  border-bottom: 1px solid #eee;width:100%;position: absolute;bottom: 5px; margin-left: 120px;
+ }
+
+   
+
+    /* 本例子 banner css-------------------------------------- */
+    .focus{ width:100%; height:185px;  margin:0 auto; position:relative; overflow:hidden; margin-bottom: 0em; }
+    .focus .hd{ width:100%; height:11px;  position:absolute; z-index:1; bottom:5px; text-align:center;  }
+    .focus .hd ul{  overflow:hidden; display:inline-block; height:5px; padding:3px 5px; /* background-color:rgba(255,255,255,0.7);  */
+        -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; font-size:0; vertical-align:top; 
+    }
+    .focus .hd ul li{ display:inline-block; width:5px; height:5px; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; background:#8C8C8C; margin:0 5px;  vertical-align:top; overflow:hidden;   }
+    .focus .hd ul .on{ background:#FE6C9C;  }
+
+    .focus .bd{ position:relative; z-index:0; }
+    .focus .bd li img{ width:100%;  height:12.5em; background:url(images/loading.gif) center center no-repeat;  }
+    .focus .bd li a{ -webkit-tap-highlight-color:rgba(0, 0, 0, 0); /* 取消链接高亮 */  }
+    a{ display: block;}
+
+
+    .get_more{
+        width: 100%;
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+    }
+
+ .past ul li {
+     border-bottom: 1px solid #c7ddef;
+     padding: 5px 10px;
+     position: relative;
+ }
+ .past ul li a  {
+
+ }
+
+ .past ul li a img{
+     padding-right: 10px;
+     height:3em;
+     text-align: center;
+     vertical-align:bottom;
+     display: inline;
+ }
+ .past ul li a p{
+     display: inline;
+     color: #333;
+     height:100%;
+     vertical-align:middle;
+     line-height:48px;
+  }
+ .past ul li a p:last-child{
+     float: right;
+     color: #666;
+ }
+ .past ul li a p:last-child span{
+     font-size: 12px;
+   }

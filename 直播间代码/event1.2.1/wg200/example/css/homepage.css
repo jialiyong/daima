@@ -1,0 +1,116 @@
+.imgheadbox{
+    /*width: 100%;*/
+    height: 40%;
+    top: -1px;
+    text-align:center;
+    left: 0;
+}
+.imghead{
+    /*width: 100%;*/
+    height: 100%;
+}
+section{
+    /*width: 100%;*/
+    position: absolute;
+    top: 52%;
+    /*border: solid 1px red;*/
+}
+ul,li{
+    width: 100%;
+    /*border: solid 1px red;*/
+    overflow: hidden;
+    font: normal 0.9rem '黑体';
+    line-height: 2.3rem;
+    list-style: none;
+}
+span{
+    display: block;
+    width: 30%;
+    float: left;
+    text-align: right;
+    /*border: solid 1px yellow;*/
+}
+b{
+
+    width: 65%;
+    margin-left: 5%;
+    list-style: none;
+    font: normal 1rem '黑体';
+}
+
+
+.buybut{
+
+    background-color:#1E73A0   ;
+    color: white;
+    font:normal 1.2rem '黑体';
+    border-radius: 20px;
+    border: none;
+    width: 94%;
+    height: 7%;
+    position: absolute;
+    bottom: 10%;
+    left: 3%;
+}
+.pc{
+    position: absolute;
+    border-radius: 20px;
+    left: 3%;
+    width: 35%;
+    height: 7%;
+    bottom: 2%;
+    border: solid 1px #d9d9d9;
+    background:white;
+    
+}
+
+.nickname{
+    position: absolute;
+    border-radius: 50%;
+    color: white;
+    right: 3%;
+    width: 4em;
+    height: 4em;
+    bottom: 20%;
+    border: solid 1px #d9d9d9;
+    background-color:#1E73A0   ;
+
+}
+.icon{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 35px;
+}
+.payli{
+    margin-left: 18%;
+}
+@media screen and (min-width: 900px) {
+    .buybut {
+    background-color: #1E73A0;
+    color: white;
+    font: normal 1.2rem 'é»‘ä½“';
+    border-radius: 20px;
+    border: none;
+    width: 30%;
+    height: 7%;
+    position: absolute;
+    bottom: 10%;
+    left: 35%;
+}
+    .title{
+        text-align: center;
+    }
+    .nickname {
+    position: absolute;
+    border-radius: 50%;
+    color: white;
+    right: 37%;
+    margin-right: -27px;
+    width: 4em;
+    height: 4em;
+    bottom: 20%;
+    border: solid 1px #d9d9d9;
+    background-color: #1E73A0;
+}
+
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport"  content="width=device-width,user-scalable=no">
+    <title>直播大厅</title>
+</head>
+<script src="TouchSlide.1.1.js"></script>
+<script src="jquery-1.11.2.min.js"></script>
+<link rel="stylesheet" href="style.css">
+<body>
+<div id="content">
+    <!-- 本例主要代码 Start ================================ -->
+    <div id="focus" class="focus">
+        <div class="hd">
+            <ul></ul>
+        </div>
+        <div class="bd">
+            <ul>
+                <volist name='rows' id='val'>
+                    <li>
+                        <a href="{$val['focus_url']?$val['focus_url']:'#'}"  />
+                        <img src="./images/banner.jpg" />
+                        </a>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+    <!--轮播图结束-->
+    <!--tabB-->
+    <div class="tab">
+        <ul>
+            <li><a href="./index.html"><img src="./images/liverd.png" alt=""><p>直播推荐</p></a></li>
+            <li class="on"><a href="./past.html"><img src="./images/past.png" alt=""><p>过往直播</p></a></li>
+            <li><a href="./ted.html"><img src="./images/ted.png" alt=""><p>海油TED</p></a></li>
+        </ul>
+    </div>
+    <!--过往直播子导航-->
+    <div class="past">
+        <ul>
+            <li><a href="./pastvideo.html"><img src="./images/pastpic1.png" alt=""><p>视频课程</p><p><span>查看更多</span>&gt;</p></a></li>
+            <li><a href="./pastmojor.html"><img src="./images/pastpic2.png" alt=""><p>直播课程</p><p><span>查看更多</span>&gt;</p></a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<!--banner制作的js-->
+<script type="text/javascript">
+    TouchSlide({
+        slideCell:"#focus",
+        titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+        mainCell:".bd ul",
+        effect:"left",
+        autoPlay:true,//自动播放
+        autoPage:true, //自动分页
+        switchLoad:"_src", //切换加载，真实图片路径为"_src"
+        /*delayTime:"5000"*/
+        interTime:"5000"
+    });
+</script>
+

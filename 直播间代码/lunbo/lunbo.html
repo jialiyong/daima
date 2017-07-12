@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .lunbo{
+            position: relative;
+            width: 600px;
+            height: 50px;
+            overflow: hidden;
+        }
+        ul{
+            position:absolute;
+            left: 0;
+            top:0;
+            width: 600px;
+            height: auto;
+        }
+        ul li{
+            width: 600px;
+            height: 50px;
+            line-height: 50px;
+            font-size:20px;
+            color:#333;
+            text-align: center
+        }
+    </style>
+</head>
+<body>
+<div class="lunbo">
+    <ul id="s">
+        <li>欢迎大家打赏！</li>
+    </ul>
+</div>
+<input type="button" value="添加到最后行" onclick="addops([1,2,3,6,4,85,5,5]);">
+<script src="./jquery.min.js"></script>
+<script>
+    function lunbo(id,height){
+        var ul=$("#"+id);
+        var li = ul.children().length;
+        if(li>1){ var liFirst=ul.find('li:first');
+            ul.animate({top:height},2000).animate({"top":0},0,function(){
+                liFirst.remove();
+            })}
+    }
+    setInterval("lunbo('s','-50px')",3000);
+    function addops(ops) {
+        var ops = ops;
+        var i = ops.length;
+        for(var y=0;y<i;y++){
+           var txt = ops[y];
+             add(1,txt)
+        };
+    };
+    function add(n,txt)
+        {
+        var s=document.getElementById('s');
+            var t=s.childNodes.length;
+            var li= document.createElement("li");
+            li.innerHTML=txt+":打赏了一个红包";
+            for (var i=0;i<t;i++)
+            {
+                if (n==-1)
+                {
+                    s.appendChild(li);
+                }
+                else if (i==n-1)
+                {
+                    s.insertBefore(li,s.childNodes[ t-2]);
+                }
+            }
+        };
+
+
+</script>
+</body>
+</html>
